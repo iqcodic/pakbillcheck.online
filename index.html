@@ -1,0 +1,618 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PakBillCheck - Quickly check and understand your FESCO (Faisalabad Electric Supply Company) electricity bill. Enter your bill reference to view details instantly.">
+    <meta name="keywords" content="FESCO bill, Pakistan electricity bill, bill checker, FESCO online, utility bills Pakistan, electricity payment">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/">
+    <!-- Open Graph -->
+    <meta property="og:title" content="PakBillCheck - FESCO Bill Checker | Check Your Electricity Bill Instantly">
+    <meta property="og:description" content="Check your FESCO electricity bill quickly using your bill reference number. Fast, secure, and reliable bill checking service for Pakistan.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:image" content="https://yourdomain.com/og-image.png">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PakBillCheck - FESCO Bill Checker">
+    <meta name="twitter:description" content="Check your FESCO electricity bill quickly using your bill reference number.">
+    <!-- Structured data (Organization) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "PakBillCheck",
+      "url": "https://yourdomain.com",
+      "logo": "https://yourdomain.com/logo.png",
+      "description": "Fast and secure electricity bill checking service for FESCO customers in Pakistan",
+      "sameAs": []
+    }
+    </script>
+
+    <title>PakBillCheck - FESCO Bill Checker | Check Your Electricity Bill Instantly</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#home" onclick="showPage('home')" class="flex items-center space-x-2">
+                    <div class="logo bg-green-500 flex items-center justify-center text-white font-bold text-sm">PB</div>
+                    <span class="text-xl font-bold text-gray-900">PakBillCheck</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden md:flex space-x-6 lg:space-x-8 items-center">
+                    <a href="#home" onclick="showPage('home')" class="nav-link">Home</a>
+                    <a href="#blog" onclick="showPage('blog')" class="nav-link">Blog</a>
+                    <a href="#districts" onclick="showPage('districts')" class="nav-link">Districts Info</a>
+                    <a href="#fesco" onclick="showPage('fesco')" class="nav-link">FESCO Info</a>
+                    <a href="#help" onclick="showPage('help')" class="nav-link">Help Center</a>
+                    <a href="#privacy" onclick="showPage('privacy')" class="nav-link">Privacy Policy</a>
+                    <a href="#contact" onclick="showPage('contact')" class="nav-link">Contact Us</a>
+                    </div>
+
+                <!-- Mobile menu button and theme toggle -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button onclick="toggleTheme()" class="theme-toggle" title="Toggle dark/light theme">
+                        <i class="fas fa-moon" id="mobile-theme-icon"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="p-2">
+                        <i class="fas fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu-content" style="display: none;">
+                <a href="#home" onclick="showPage('home'); closeMobileMenu();">Home</a>
+                <a href="#blog" onclick="showPage('blog'); closeMobileMenu();">Blog</a>
+                <a href="#districts" onclick="showPage('districts'); closeMobileMenu();">Districts Info</a>
+                <a href="#fesco" onclick="showPage('fesco'); closeMobileMenu();">FESCO Info</a>
+                <a href="#help" onclick="showPage('help'); closeMobileMenu();">Help Center</a>
+                <a href="#privacy" onclick="showPage('privacy'); closeMobileMenu();">Privacy Policy</a>
+                <a href="#contact" onclick="showPage('contact'); closeMobileMenu();">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        
+        <!-- Home Page -->
+        <div id="page-home" class="page">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
+                            Check Your <span class="text-green-600">FESCO Bill</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
+                            Quick and easy electricity bill checking for FESCO customers across Pakistan
+                        </p>
+                    </div>
+
+                    <!-- Bill Checker Form -->
+                    <div class="card max-w-lg mx-auto shadow-lg">
+                        <div class="p-6 sm:p-8">
+                            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6 text-center">FESCO Bill Checker</h2>
+                            <p class="text-sm sm:text-base text-gray-600 mb-4 text-center">Enter your bill reference number to check your electricity bill</p>
+
+                            <form onsubmit="checkBill(event)" class="space-y-4">
+                                <div>
+                                    <label for="billRef" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Bill Reference Number *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="billRef"
+                                        placeholder="Example: 01234567890123"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                                        onclick="redirectToFESCO()"
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" class="btn-primary w-full">
+                                    Check Bill
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-12 sm:py-16 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Why Choose PakBillCheck?</h2>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Fast, reliable, and secure bill checking service for Pakistani utility customers</p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+                        <div class="card feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Instant Results</h3>
+                            <p class="text-gray-600">Get your bill details instantly with our quick redirect service</p>
+                        </div>
+
+                        <div class="card feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Secure & Safe</h3>
+                            <p class="text-gray-600">Your information is protected with bank-level security measures</p>
+                        </div>
+
+                        <div class="card feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Mobile Friendly</h3>
+                            <p class="text-gray-600">Access from any device - desktop, tablet, or smartphone</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Latest Blog Posts -->
+            <section class="py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Latest Blog Posts</h2>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Stay updated with the latest news, tips, and insights about electricity and utilities in Pakistan</p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                        <div class="card blog-post" onclick="showBlogPost(1)">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Understanding FESCO Bills" class="w-full h-48 object-cover rounded-t-lg" />
+                            <div class="p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Tips</span>
+                                    <span class="text-gray-500 text-sm ml-auto">Jan 15, 2024</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Understanding Your FESCO Electricity Bill</h3>
+                                <p class="text-gray-600 text-sm">Learn how to read and understand your monthly electricity bill from FESCO.</p>
+                            </div>
+                        </div>
+
+                        <div class="card blog-post" onclick="showBlogPost(2)">
+                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Online Bill Payment" class="w-full h-48 object-cover rounded-t-lg" />
+                            <div class="p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Guide</span>
+                                    <span class="text-gray-500 text-sm ml-auto">Jan 10, 2024</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">How to Pay Your Electricity Bill Online</h3>
+                                <p class="text-gray-600 text-sm">Step-by-step guide to paying your electricity bills online safely and securely.</p>
+                            </div>
+                        </div>
+
+                        <div class="card blog-post" onclick="showBlogPost(3)">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Energy Saving Tips" class="w-full h-48 object-cover rounded-t-lg" />
+                            <div class="p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Savings</span>
+                                    <span class="text-gray-500 text-sm ml-auto">Jan 5, 2024</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Energy Saving Tips for Pakistani Households</h3>
+                                <p class="text-gray-600 text-sm">Practical ways to reduce your electricity consumption and save money on your monthly bills.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="showPage('blog')" class="btn-primary">
+                            View All Blog Posts
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Blog Page -->
+        <div id="page-blog" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Utility Blog - Expert Tips & Insights</h1>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Latest news, tips, and updates about electricity, utilities, and energy management in Pakistan</p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                        <div class="card blog-post" onclick="showBlogPost(1)">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Understanding FESCO Bills" class="w-full h-48 object-cover rounded-t-lg" />
+                            <div class="p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Tips</span>
+                                    <span class="text-gray-500 text-sm ml-auto">Jan 15, 2024</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Understanding Your FESCO Electricity Bill</h3>
+                                <p class="text-gray-600 text-sm">Learn how to read and understand your monthly electricity bill from FESCO.</p>
+                            </div>
+                        </div>
+
+                        <div class="card blog-post" onclick="showBlogPost(2)">
+                            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Online Bill Payment" class="w-full h-48 object-cover rounded-t-lg" />
+                            <div class="p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Guide</span>
+                                    <span class="text-gray-500 text-sm ml-auto">Jan 10, 2024</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">How to Pay Your Electricity Bill Online</h3>
+                                <p class="text-gray-600 text-sm">Step-by-step guide to paying your electricity bills online safely and securely.</p>
+                            </div>
+                        </div>
+
+                        <div class="card blog-post" onclick="showBlogPost(3)">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" alt="Energy Saving Tips" class="w-full h-48 object-cover rounded-t-lg" />
+                            <div class="p-6">
+                                <div class="flex items-center mb-3">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">Savings</span>
+                                    <span class="text-gray-500 text-sm ml-auto">Jan 5, 2024</span>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Energy Saving Tips for Pakistani Households</h3>
+                                <p class="text-gray-600 text-sm">Practical ways to reduce your electricity consumption and save money on your monthly bills.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Blog Post Detail Page -->
+        <div id="page-blog-post" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <button onclick="showPage('blog')" class="mb-6 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Blog
+                    </button>
+                    
+                    <div class="card">
+                        <img id="blog-post-image" src="" alt="" class="w-full h-64 sm:h-80 object-cover rounded-t-lg" />
+                        <div class="p-6 sm:p-8">
+                            <div class="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user mr-1"></i>
+                                    <span id="blog-post-author"></span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar mr-1"></i>
+                                    <span id="blog-post-date"></span>
+                                </div>
+                            </div>
+                            
+                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6" id="blog-post-title"></h1>
+                            
+                            <div class="prose prose-gray max-w-none" id="blog-post-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Districts Info Page -->
+        <div id="page-districts" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">FESCO Districts Information</h1>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Complete list of districts served by Faisalabad Electric Supply Company</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Faisalabad</h3>
+                            <p class="text-gray-600 text-sm">Complete electricity distribution and bill services for Faisalabad district</p>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Chiniot</h3>
+                            <p class="text-gray-600 text-sm">Complete electricity distribution and bill services for Chiniot district</p>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Jhang</h3>
+                            <p class="text-gray-600 text-sm">Complete electricity distribution and bill services for Jhang district</p>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Toba Tek Singh</h3>
+                            <p class="text-gray-600 text-sm">Complete electricity distribution and bill services for Toba Tek Singh district</p>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Sargodha</h3>
+                            <p class="text-gray-600 text-sm">Complete electricity distribution and bill services for Sargodha district</p>
+                        </div>
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Khushab</h3>
+                            <p class="text-gray-600 text-sm">Complete electricity distribution and bill services for Khushab district</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- FESCO Info Page -->
+        <div id="page-fesco" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">FESCO - Faisalabad Electric Supply Company</h1>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Learn about Pakistan's major electricity distribution company serving millions of customers</p>
+                    </div>
+
+                    <div class="grid gap-8 mb-8">
+                        <div class="card p-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">About FESCO</h2>
+                            <p class="text-gray-600 mb-4">Faisalabad Electric Supply Company (FESCO) is one of Pakistan's largest electricity distribution companies, serving over 4 million customers across central Punjab province.</p>
+                            <p class="text-gray-600">Established to provide reliable electricity distribution services, FESCO covers major industrial and agricultural areas, contributing significantly to Pakistan's economic development.</p>
+                        </div>
+
+                        <div class="card p-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Service Areas</h2>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 mb-2">Major Districts:</h3>
+                                    <ul class="text-gray-600 text-sm space-y-1">
+                                        <li>• Faisalabad</li>
+                                        <li>• Sargodha</li>
+                                        <li>• Jhang</li>
+                                        <li>• Chiniot</li>
+                                        <li>• Toba Tek Singh</li>
+                                        <li>• Khushab</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 mb-2">Customer Types:</h3>
+                                    <ul class="text-gray-600 text-sm space-y-1">
+                                        <li>• Residential customers</li>
+                                        <li>• Commercial establishments</li>
+                                        <li>• Industrial consumers</li>
+                                        <li>• Agricultural users</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card p-8">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">How to Check Your FESCO Bill</h2>
+                            <p class="text-gray-600 mb-4">You can easily check your FESCO electricity bill using your reference number:</p>
+                            <ol class="text-gray-600 text-sm space-y-2 pl-4">
+                                <li>1. Find your bill reference number on your physical bill</li>
+                                <li>2. Enter the reference number in our bill checker above</li>
+                                <li>3. Click "Check Bill" to view your bill details</li>
+                                <li>4. You'll be redirected to the official FESCO bill portal</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Help Center Page -->
+        <div id="page-help" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Help Center - Frequently Asked Questions</h1>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Find answers to common questions about FESCO bills and our services</p>
+                    </div>
+
+                    <div class="grid gap-6">
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">How do I check my FESCO bill online?</h3>
+                            <p class="text-gray-600 text-sm">Simply enter your bill reference number in the bill checker form on our homepage. You'll be redirected to the official FESCO portal to view your complete bill details.</p>
+                        </div>
+
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Where can I find my bill reference number?</h3>
+                            <p class="text-gray-600 text-sm">Your bill reference number is printed on your physical electricity bill, usually at the top or in a prominent location. It's typically a 14-digit number.</p>
+                        </div>
+
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Can I pay my bill through this website?</h3>
+                            <p class="text-gray-600 text-sm">We provide bill checking services and redirect you to the official FESCO website where you can make payments securely through various methods.</p>
+                        </div>
+
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">Is my information secure?</h3>
+                            <p class="text-gray-600 text-sm">Yes, we prioritize your privacy and security. We don't store your bill information and redirect you directly to official FESCO services.</p>
+                        </div>
+
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">What if I can't find my bill reference number?</h3>
+                            <p class="text-gray-600 text-sm">If you've lost your physical bill, you can contact FESCO customer service at 1991 or visit your nearest FESCO office with your CNIC to get bill details.</p>
+                        </div>
+
+                        <div class="card p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2">How often are bills generated?</h3>
+                            <p class="text-gray-600 text-sm">FESCO generates electricity bills monthly. You should receive your bill within the first week of each month for the previous month's consumption.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Privacy Policy Page -->
+        <div id="page-privacy" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">How we protect your privacy and handle your information</p>
+                    </div>
+
+                    <div class="prose prose-gray max-w-none">
+                        <div class="card p-8">
+                            <h2>Information We Collect</h2>
+                            <p>We only collect the bill reference numbers you enter to facilitate bill checking services. We do not store this information permanently.</p>
+                            
+                            <h2>How We Use Your Information</h2>
+                            <p>Your bill reference number is used solely to redirect you to the official FESCO bill checking portal. We do not use this information for any other purpose.</p>
+                            
+                            <h2>Information Sharing</h2>
+                            <p>We do not share, sell, or distribute your information to third parties. Your bill reference number is directly transmitted to FESCO's official portal.</p>
+                            
+                            <h2>Data Security</h2>
+                            <p>We implement appropriate security measures to protect your information during transmission. All connections are secured using industry-standard encryption.</p>
+                            
+                            <h2>Contact Us</h2>
+                            <p>If you have any questions about this Privacy Policy, please contact us through our contact form or email us directly.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Us Page -->
+        <div id="page-contact" class="page" style="display: none;">
+            <section class="py-12 sm:py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-8 sm:mb-12">
+                        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
+                        <p class="text-gray-600 text-base sm:text-lg px-4">Get in touch with us for support, questions, or feedback</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Contact Information -->
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-envelope text-green-600 text-xl mt-1"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="font-semibold text-gray-900">Email</h3>
+                                        <p class="text-gray-600">bai622887@gmail.com</p>
+                                        <p class="text-gray-600 text-sm">We'll respond within 24 hours</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-phone text-green-600 text-xl mt-1"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="font-semibold text-gray-900">Phone</h3>
+                                        <p class="text-gray-600">03046325424</p>
+                                        <p class="text-gray-600 text-sm">Mon-Fri, 9:00 AM - 6:00 PM PKT</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-clock text-green-600 text-xl mt-1"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="font-semibold text-gray-900">Support Hours</h3>
+                                        <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                        <p class="text-gray-600">Saturday - Sunday: 10:00 AM - 4:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="card p-6">
+                            <h2 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+                            <form id="contact-form" onsubmit="sendMessage(event)" class="space-y-4">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                                </div>
+
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                                </div>
+
+                                <div>
+                                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+                                    <select id="subject" name="subject" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500">
+                                        <option value="">Select a subject</option>
+                                        <option value="Bill Checking Issue">Bill Checking Issue</option>
+                                        <option value="Technical Support">Technical Support</option>
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Feedback">Feedback</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                                    <textarea id="message" name="message" rows="5" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500" placeholder="Please describe your question or issue in detail..."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn-primary w-full">
+                                    Send Message
+                                    <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="logo bg-green-500 flex items-center justify-center text-white font-bold text-sm">PB</div>
+                        <span class="text-xl font-bold">PakBillCheck</span>
+                    </div>
+                    <p class="text-gray-300 text-sm">Fast, reliable, and secure electricity bill checking service for FESCO customers across Pakistan.</p>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <div class="space-y-2">
+                        <a href="#home" onclick="showPage('home')" class="block text-gray-300 hover:text-green-400 text-sm">Home</a>
+                        <a href="#blog" onclick="showPage('blog')" class="block text-gray-300 hover:text-green-400 text-sm">Blog</a>
+                        <a href="#districts" onclick="showPage('districts')" class="block text-gray-300 hover:text-green-400 text-sm">Districts</a>
+                        <a href="#fesco" onclick="showPage('fesco')" class="block text-gray-300 hover:text-green-400 text-sm">FESCO Info</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <div class="space-y-2">
+                        <a href="#help" onclick="showPage('help')" class="block text-gray-300 hover:text-green-400 text-sm">Help Center</a>
+                        <a href="#contact" onclick="showPage('contact')" class="block text-gray-300 hover:text-green-400 text-sm">Contact Us</a>
+                        <a href="#privacy" onclick="showPage('privacy')" class="block text-gray-300 hover:text-green-400 text-sm">Privacy Policy</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold mb-4">Services</h3>
+                    <div class="space-y-2">
+                        <span class="block text-gray-300 text-sm">FESCO Bill Checking</span>
+                        <span class="block text-gray-300 text-sm">Electricity Tips</span>
+                        <span class="block text-gray-300 text-sm">Energy Saving Guides</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300 text-sm">© 2024 PakBillCheck. All rights reserved. Made for Pakistani utility customers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
