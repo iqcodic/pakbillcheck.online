@@ -1,186 +1,424 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PakBillCheck - Quickly check and understand your FESCO (Faisalabad Electric Supply Company) electricity bill. Enter your bill reference to view details instantly.">
-    <meta name="keywords" content="FESCO bill, Pakistan electricity bill, bill checker, FESCO online, utility bills Pakistan, electricity payment">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://yourdomain.com/">
-    <!-- Open Graph -->
-    <meta property="og:title" content="PakBillCheck - FESCO Bill Checker | Check Your Electricity Bill Instantly">
-    <meta property="og:description" content="Check your FESCO electricity bill quickly using your bill reference number. Fast, secure, and reliable bill checking service for Pakistan.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/">
-    <meta property="og:image" content="https://yourdomain.com/og-image.png">
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PakBillCheck - FESCO Bill Checker">
-    <meta name="twitter:description" content="Check your FESCO electricity bill quickly using your bill reference number.">
-    <!-- Structured data (Organization) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "PakBillCheck",
-      "url": "https://yourdomain.com",
-      "logo": "https://yourdomain.com/logo.png",
-      "description": "Fast and secure electricity bill checking service for FESCO customers in Pakistan",
-      "sameAs": []
-    }
-    </script>
+    <title>PakBill Check</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #004d40;
+            --card-bg: white;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --blur-bg: saturate(180%) blur(10px);
+            --footer-bg: #004d40;
+            --footer-text-color: #e0f2f1;
+        }
 
-    <title>PakBillCheck - FESCO Bill Checker | Check Your Electricity Bill Instantly</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"> 
+        html {
+            scroll-behavior: smooth;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding-top: 70px;
+        }
 
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--nav-bg);
+            backdrop-filter: var(--blur-bg);
+            -webkit-backdrop-filter: var(--blur-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LRHK513NKX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        .navbar .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
 
-  gtag('config', 'G-LRHK513NKX');
-</script>
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
 
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
+        .nav-links a:hover {
+            color: #00796b;
+        }
 
-    
+        .main-content {
+            padding: 2rem;
+        }
+
+        .hero-section {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .hero-section h1 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section p {
+            color: #546e7a;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .form-redirect-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: 1px solid #b0bec5;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-redirect-wrapper:hover {
+            border-color: #00796b;
+            background-color: #ffffff;
+        }
+
+        .form-redirect-wrapper input {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            box-sizing: border-box;
+            color: #37474f;
+            pointer-events: none;
+        }
+        
+        .form-redirect-wrapper input::placeholder {
+            color: #546e7a;
+        }
+
+        .form-redirect-wrapper .check-bill-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background-color: #00796b;
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .table-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        .table-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .custom-table th, .custom-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .custom-table th {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            background-color: #f7f9f8;
+            color: var(--text-color);
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Calculator Styles */
+        .calculator-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            text-align: center;
+        }
+        .calculator-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+        .calculator-input-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .calculator-input-group input {
+            padding: 1rem;
+            border: 1px solid #b0bec5;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            width: 200px;
+            text-align: center;
+        }
+        .calculator-input-group button {
+            padding: 1rem 2rem;
+            border: none;
+            background-color: #00796b;
+            color: white;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calculator-input-group button:hover {
+            background-color: #004d40;
+        }
+        #bill-result {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        #bill-result span {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+        }
+
+        .footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text-color);
+            padding: 4rem 2rem 2rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-owner {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-contact {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-contact a {
+            color: var(--footer-text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-contact a:hover {
+            color: #80cbc4;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <a href="#home" onclick="showPage('home')" class="flex items-center space-x-2">
-                    <div class="logo bg-green-500 flex items-center justify-center text-white font-bold text-sm">PB</div>
-                    <span class="text-xl font-bold text-gray-900">PakBillCheck</span>
-                </a>
-
-                <!-- Desktop Navigation -->
-                <div class="desktop-nav hidden md:flex space-x-6 lg:space-x-8 items-center">
-                    <a href="#home" onclick="showPage('home')" class="nav-link">Home</a>
-                    <a href="#blog" onclick="showPage('blog')" class="nav-link">Blog</a>
-                    <a href="#districts" onclick="showPage('districts')" class="nav-link">Districts Info</a>
-                    <a href="#fesco" onclick="showPage('fesco')" class="nav-link">FESCO Info</a>
-                    <a href="#help" onclick="showPage('help')" class="nav-link">Help Center</a>
-                    <a href="#privacy" onclick="showPage('privacy')" class="nav-link">Privacy Policy</a>
-                    <a href="#contact" onclick="showPage('contact')" class="nav-link">Contact Us</a>
-                    </div>
-
-                <!-- Mobile menu button and theme toggle -->
-                <div class="md:hidden flex items-center space-x-2">
-                    <button onclick="toggleTheme()" class="theme-toggle" title="Toggle dark/light theme">
-                        <i class="fas fa-moon" id="mobile-theme-icon"></i>
-                    </button>
-                    <button onclick="toggleMobileMenu()" class="p-2">
-                        <i class="fas fa-bars" id="menu-icon"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="mobile-menu-content" style="display: none;">
-                <a href="#home" onclick="showPage('home'); closeMobileMenu();">Home</a>
-                <a href="#blog" onclick="showPage('blog'); closeMobileMenu();">Blog</a>
-                <a href="#districts" onclick="showPage('districts'); closeMobileMenu();">Districts Info</a>
-                <a href="#fesco" onclick="showPage('fesco'); closeMobileMenu();">FESCO Info</a>
-                <a href="#help" onclick="showPage('help'); closeMobileMenu();">Help Center</a>
-                <a href="#privacy" onclick="showPage('privacy'); closeMobileMenu();">Privacy Policy</a>
-                <a href="#contact" onclick="showPage('contact'); closeMobileMenu();">Contact Us</a>
-            </div>
+    <nav class="navbar">
+        <a href="#" class="logo">PAKBILLCHECK</a>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#unit-prices">Unit Prices</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#fesco-offices">Offices</a>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        
-        <!-- Home Page -->
-        <div id="page-home" class="page">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-8 sm:mb-12">
-                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6">
-                            Check Your <span class="text-green-600">FESCO Bill</span>
-                        </h1>
-                        <p class="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-                            Quick and easy electricity bill checking for FESCO customers across Pakistan
-                        </p>
-                    </div>
+    <div class="main-content">
+        <section id="hero" class="hero-section">
+            <h1>FESCO Bill Check</h1>
+            <p>Your reliable way to check FESCO bills online</p>
+            <div class="form-redirect-wrapper" onclick="window.open('https://bill.pitc.com.pk/fescobill', '_blank');">
+                <input 
+                    type="text" 
+                    placeholder="Click to check your bill" 
+                    readonly
+                >
+                <button type="button" class="check-bill-btn">Check</button>
+            </div>
+        </section>
 
-                    <!-- Bill Checker Form -->
-                    <div class="card max-w-lg mx-auto shadow-lg">
-                        <div class="p-6 sm:p-8">
-                            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4 sm:mb-6 text-center">FESCO Bill Checker</h2>
-                            <p class="text-sm sm:text-base text-gray-600 mb-4 text-center">Enter your bill reference number to check your electricity bill</p>
+        <section id="unit-prices" class="table-section">
+            <h2>Today Unit Price</h2>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Units</th>
+                        <th>Price per Unit (PKR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1-100</td>
+                        <td>9.42</td>
+                    </tr>
+                    <tr>
+                        <td>101-200</td>
+                        <td>18.56</td>
+                    </tr>
+                    <tr>
+                        <td>201-300</td>
+                        <td>24.34</td>
+                    </tr>
+                    <tr>
+                        <td>301-700</td>
+                        <td>35.28</td>
+                    </tr>
+                     <tr>
+                        <td>Above 700</td>
+                        <td>42.72</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-                            <form onsubmit="checkBill(event)" class="space-y-4">
-                                <div>
-                                    <label for="billRef" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Bill Reference Number *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="billRef"
-                                        placeholder="Example: 01234567890123"
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
-                                        onclick="redirectToFESCO()"
-                                        required
-                                    />
-                                </div>
-                                <button type="submit" class="btn-primary w-full">
-                                    Check Bill
-                                    <i class="fas fa-arrow-right ml-2"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section id="calculator" class="calculator-section">
+            <h2>Estimate Your Bill</h2>
+            <div class="calculator-input-group">
+                <input type="number" id="units-input" placeholder="Enter Units (e.g., 250)">
+                <button onclick="calculateBill()">Calculate</button>
+            </div>
+            <div id="bill-result"></div>
+        </section>
 
-            <!-- Features Section -->
-            <section class="py-12 sm:py-16 bg-gray-50">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-8 sm:mb-12">
-                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Why Choose PakBillCheck?</h2>
-                        <p class="text-gray-600 text-base sm:text-lg px-4">Fast, reliable, and secure bill checking service for Pakistani utility customers</p>
-                    </div>
+        <section id="fesco-offices" class="table-section">
+            <h2>FESCO Office Locations and Helpline</h2>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>City/Region</th>
+                        <th>Office Address</th>
+                        <th>Helpline Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Faisalabad</td>
+                        <td>West Canal Road, Abdullah Pur, Faisalabad</td>
+                        <td>+92 (41) 9220184-9220229</td>
+                    </tr>
+                    <tr>
+                        <td>Sargodha</td>
+                        <td>University Road, Near 47 Pull, Sargodha</td>
+                        <td>+92 (48) 9230168</td>
+                    </tr>
+                    <tr>
+                        <td>Jhang</td>
+                        <td>Gojra Road, Near Grid Station, Jhang</td>
+                        <td>+92 (47) 9200301</td>
+                    </tr>
+                    <tr>
+                        <td>Mianwali</td>
+                        <td>Ballo Khel Road, Mianwali</td>
+                        <td>+92 (459) 920024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
 
-                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-                        <div class="card feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Instant Results</h3>
-                            <p class="text-gray-600">Get your bill details instantly with our quick redirect service</p>
-                        </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-owner">Muhammad Bilal</div>
+            <div class="footer-contact">
+                <a href="tel:03046325424">03046325424</a> | 
+                <a href="mailto:bai622887@gmail.com">bai622887@gmail.com</a>
+            </div>
+            <div class="copyright">
+                © 2025 PAKBILLCHECK. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
 
-                        <div class="card feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Secure & Safe</h3>
-                            <p class="text-gray-600">Your information is protected with bank-level security measures</p>
-                        </div>
+    <script>
+        function calculateBill() {
+            const units = document.getElementById('units-input').value;
+            const resultDiv = document.getElementById('bill-result');
 
-                        <div class="card feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-3">Mobile Friendly</h3>
-                            <p class="text-gray-600">Access from any device - desktop, tablet, or smartphone</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            if (units === '' || units <= 0) {
+                resultDiv.innerHTML = 'Please enter a valid number of units.';
+                return;
+            }
 
-            <!-- Latest Blog Posts -->
+            let totalBill = 0;
+            let remainingUnits = units;
+
+            if (remainingUnits > 0) {
+                const slab1Units = Math.min(remainingUnits, 100);
+                totalBill += slab1Units * 9.42;
+                remainingUnits -= slab1Units;
+            }
+            if (remainingUnits > 0) {
+                const slab2Units = Math.min(remainingUnits, 100);
+                totalBill
+          <!-- Latest Blog Posts -->
             <section class="py-12 sm:py-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-8 sm:mb-12">
